@@ -1,0 +1,16 @@
+{% load i18n %}
+<p>
+  {% for tag in tags %}
+    <a href="{% url 'zinnia:tag_detail' tag.name %}"
+       title="{% blocktrans count entry_count=tag.count %}{{ entry_count }} entry tagged by {{ tag }}{% plural %}{{ entry_count }} entries tagged by {{ tag }}{% endblocktrans %}" class="hastip">
+<button class="remotebutt" >
+  {{ tag }} <span class="badge">{{ tag.count}}</span>
+</button>
+</a>
+
+  {% empty %}
+  
+    {% trans "No tags yet." %}
+  
+  {% endfor %}
+</p>

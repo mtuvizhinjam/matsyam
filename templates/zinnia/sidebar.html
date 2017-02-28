@@ -1,0 +1,152 @@
+{% load i18n %}
+{% load zinnia %}
+{% block sidebar %}
+
+<h1> </h1>
+<div class="panel panel-default">
+  <div class="panel-heading">
+  <h3>Donate</h3>
+  </div>
+  <div class="panel-body">
+    <a href="https://www.paypal.me/harold11" target="_blank"><p style="color:#C4A914"><i class="fa fa-cc-paypal fa-2x" aria-hidden="true"></i></p></a>
+    <script src="//blockr.io/js_external/coinwidget/coin.js"></script>
+    <script>
+      CoinWidgetCom.go({
+        wallet_address: '1J6c3bXh76NEVrG6fYSPoTSWufBAgJHK4g',
+        currency: 'bitcoin',
+        counter: 'count',
+        lbl_button: 'Donate BTC',
+        lbl_count: 'donations',
+        lbl_amount: 'BTC',
+        lbl_address: 'Use address below to donate. Thanks!',
+        qrcode: true,
+        alignment: 'bl',
+        decimals: 8,
+        size: "small",
+        color: "dark",
+        countdownFrom: "0",
+        element: "#coinwidget-bitcoin-1J6c3bXh76NEVrG6fYSPoTSWufBAgJHK4g",
+        onShow: function(){},
+        onHide: function(){}
+      });
+    </script>
+    <div id="coinwidget-bitcoin-1J6c3bXh76NEVrG6fYSPoTSWufBAgJHK4g"></div>
+  </div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a href="{% url 'zinnia:category_list' %}">{% trans "Categories" %}</a>
+  </div>
+  <div class="panel-body">
+  {% get_categories %}
+</div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a href="{% url 'zinnia:author_list' %}">{% trans "Authors" %}</a>
+  </div>
+  <div class="panel-body">
+  {% get_authors %}
+</div>
+</div>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <a href="{% url 'zinnia:tag_list' %}">{% trans "Tags" %}</a>
+  </div>
+  <div class="panel-body">
+  {% get_tag_cloud %}
+  </div>
+</div>
+
+<!-- <aside id="widget-recents" class="widget">
+  <h5>{% trans "Recent entries" %}</h5>
+  {% get_recent_entries %}
+</aside>
+<aside id="widget-comments" class="widget">
+  <h5>{% trans "Recent comments" %}</h5>
+  {% get_recent_comments %}
+</aside> -->
+<div class="panel panel-default">
+  <div class="panel-heading">
+  {% trans "Recent linkbacks" %}
+  </div>
+  <div class="panel-body">
+  {% get_recent_linkbacks %}
+</div>
+</div>
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+  {% trans "Random entries" %}
+  </div>
+  <div class="panel-body">
+ {% get_random_entries %}
+</div>
+</div>
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+  {% trans "Popular entries" %}
+  </div>
+  <div class="panel-body">
+ {% get_popular_entries %}
+</div>
+</div>
+
+
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+  {% trans "Archives" %}
+  </div>
+  <div class="panel-body">
+ {% get_archives_entries %}
+</div>
+</div>
+
+
+<aside id="widget-calendar" class="calendar">
+  <h5>{% trans "Calendar" %}</h5>
+  {% get_calendar_entries %}
+</aside>
+
+{% if user.is_authenticated %}
+<div class="panel panel-default">
+  <div class="panel-heading">
+    {% trans "Tools" %} 
+    </div>
+  <div class="panel-body">
+  <ul class="list-unstyled">
+    {% if perms.zinnia %}
+    <li>
+      <a href="{% url 'admin:app_list' 'zinnia' %}" title="{% trans "Dashboard" %}">
+        {% trans "Dashboard" %}
+      </a>
+    </li>
+    {% endif %}
+    {% if perms.zinnia.add_entry %}
+    <li>
+      <a href="{% url 'admin:zinnia_entry_add' %}" title="{% trans "Post an entry" %}">
+        {% trans "Post an entry" %}
+      </a>
+    </li>
+    {% endif %}
+    {% block admin-tools %}
+    {% endblock admin-tools %}
+    <li>
+      <a href="{% url 'admin:logout' %}" title="{% trans "Log out" %}">
+        {% trans "Log out" %}
+      </a>
+    </li>
+  </ul>
+</div>
+</div>
+{% endif %}
+<script type="text/javascript" src="//rf.revolvermaps.com/0/0/6.js?i=533k2t2f509&amp;m=2&amp;s=220&amp;c=54ff00&amp;cr1=ff0000&amp;f=arial&amp;l=0" async="async"></script>
+{% endblock sidebar %}
