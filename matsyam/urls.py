@@ -28,5 +28,6 @@ urlpatterns = [
 
 
     url(r'^about/$', TemplateView.as_view(template_name="checker.html")),
+    url(r'^google/$',TemplateView.as_view(template_name="checker.html") ,name='google'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
